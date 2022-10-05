@@ -14,3 +14,12 @@ Roadmap/Improvements to this bot
 
 1. Automate it to send the message at UTC 00:00
 2. Add a live timer to the message?
+
+
+
+
+.env.example file comments
+TOKEN - bot token from diiscord developers page
+PATHTOQUETIONSCSV- path of the file containing questions in CSV format
+LEETCODEURL - as name
+DELAY - can be set to adjust no of reminders sent throughout the day
