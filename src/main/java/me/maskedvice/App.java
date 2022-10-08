@@ -18,6 +18,6 @@ public final class App {
         
         String token = config.get("TOKEN");
         jdaBuilder = JDABuilder.createDefault(token);
-        jdaBuilder.enableIntents(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.GUILD_MESSAGES).addEventListeners(new SendEasyQuestion()).build();
+        jdaBuilder.enableIntents(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.GUILD_MESSAGES).addEventListeners(new SendQuestion()).build();
     }
 }

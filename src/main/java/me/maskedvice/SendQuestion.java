@@ -20,7 +20,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-public class SendEasyQuestion extends  ListenerAdapter {
+public class SendQuestion extends  ListenerAdapter {
     private static final Dotenv config = Dotenv.configure().load();
     
     @Override
