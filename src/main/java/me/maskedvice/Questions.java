@@ -55,5 +55,7 @@ public class Questions {
     @CsvBindByName(column = "likes ratio")
     public String LikesRatio;
 
+    public boolean isUsed;
+
     //  getters, setters, toString
 }

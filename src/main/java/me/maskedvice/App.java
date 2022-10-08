@@ -1,7 +1,6 @@
 package me.maskedvice;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
@@ -19,7 +18,6 @@ public final class App {
         
         String token = config.get("TOKEN");
         jdaBuilder = JDABuilder.createDefault(token);
-        JDA jda = jdaBuilder.enableIntents(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.GUILD_MESSAGES).addEventListeners(new SendEasyQuestion(),new SendReminders()).build();
-        jda.upsertCommand("get-ques","Fetch questions for the day").setGuildOnly(true).queue();
+        jdaBuilder.enableIntents(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.GUILD_MESSAGES).addEventListeners(new SendEasyQuestion()).build();
     }
 }
