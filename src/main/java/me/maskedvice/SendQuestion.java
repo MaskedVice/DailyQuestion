@@ -32,33 +32,29 @@ public class SendQuestion extends  ListenerAdapter {
 
             if(event.getMessage().getContentRaw().equalsIgnoreCase("!ques") && event.getChannel().getIdLong() == Long.parseLong(config.get("CHANNELIDRISTRICTEDFORMESSAGE")))
             {
-                    //Filter only free questions
-                    final List<Questions> quesList = questions.stream().filter(q -> q.isPaidOnly.equalsIgnoreCase("false")).collect(Collectors.toList());
+                //Filter only free questions
+                final List<Questions> quesList = questions.stream().filter(q -> q.isPaidOnly.equalsIgnoreCase("false")).collect(Collectors.toList());
 
-                    //Scheduler that sends message with delay
-                    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-                    Runnable task = () -> {
+                //Scheduler that sends message with delay
+                ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+                Runnable task = () -> {
 
-                        //Get easy question from list and set isused as 1
-                        Questions easy = quesList.stream().filter(q->!q.isUsed).findFirst().get();
-                        easy.isUsed = true;
+                    //Get easy question from list and set isused as 1
+                    Questions easy = quesList.stream().filter(q->!q.isUsed).findFirst().get();
+                    easy.isUsed = true;
 
-                        //Get Hard question from leetcode
-                        Questions medHard = getQuestionOfTheDay(quesList);
-                        
-                        // Get message to send
-                        String message = getMessageToSend(easy, medHard);
+                    //Get Hard question from leetcode
+                    Questions medHard = getQuestionOfTheDay(quesList);
+                    
+                    // Get message to send
+                    String message = getMessageToSend(easy, medHard);
 
-                        //Send Message
-                        event.getChannel().sendMessage(message).queue();
-                    };
-                    //Executor can be setup with delay and TImeUnit(seconds,minutes,days etc)
-                    executor.scheduleWithFixedDelay(task, 0, Integer.parseInt(config.get("DELAY")), TimeUnit.DAYS);
+                    //Send Message
+                    event.getChannel().sendMessage(message).queue();
+                };
+                //Executor can be setup with delay and TImeUnit(seconds,minutes,days etc)
+                executor.scheduleWithFixedDelay(task, 0, Integer.parseInt(config.get("DELAY")), TimeUnit.DAYS);
                 
-            }
-            else{
-                if (event.getAuthor().equals(event.getJDA().getSelfUser())) return;
-                event.getChannel().sendMessage("Command not Allowed in this Channel").queue();  
             }
         } catch (Exception e) {
             e.printStackTrace();
