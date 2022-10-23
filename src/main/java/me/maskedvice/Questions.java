@@ -1,6 +1,16 @@
 package me.maskedvice;
 
+import java.io.IOException;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.bean.AbstractBeanField;
+import com.opencsv.bean.CsvBindAndSplitByName;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import com.opencsv.exceptions.CsvConstraintViolationException;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+
 
 public class Questions {
 
@@ -34,8 +44,8 @@ public class Questions {
     @CsvBindByName(column = "frontendQuestionId")
     public String FrontendQuestionId;
 
-    @CsvBindByName(column = "topicTags")
-    public String TopicTags;
+    @CsvBindAndSplitByName(column = "topicTags", splitOn = ";",elementType = String.class)
+    public List<String> TopicTags;
 
     @CsvBindByName(column = "hasSolution")
     public String HasSolution;
@@ -56,6 +66,6 @@ public class Questions {
     public String LikesRatio;
 
     public boolean isUsed;
-
     //  getters, setters, toString
+
 }
